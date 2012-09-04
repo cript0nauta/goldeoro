@@ -1,0 +1,11 @@
+{% extends 'soccerstats/base.html' %}
+
+{% block contenido %}
+
+<h1>Elija un partido para administrar</h1>
+
+{% for partido in partidos %}
+	<div class="partido"><a href="/adminmatch/partido/{{ partido.id  }}/">{{ partido }}</a></div>
+{% endfor %}
+
+{% endblock %}

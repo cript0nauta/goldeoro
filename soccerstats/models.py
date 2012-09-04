@@ -13,6 +13,7 @@ class Jugador(models.Model):
 	nombre = models.CharField(max_length = 60)
 	casaca = models.IntegerField()
 	equipo = models.ForeignKey(Equipo)
+	activo = models.BooleanField(default = True)
 	def __unicode__(self):
 		return self.nombre
 

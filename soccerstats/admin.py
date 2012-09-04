@@ -12,8 +12,9 @@ class EquipoAdmin(admin.ModelAdmin):
 admin.site.register(Equipo, EquipoAdmin)
 
 class PlayerAdmin(admin.ModelAdmin):
-	list_display = ['nombre','equipo']
+	list_display = ['casaca', 'nombre','equipo']
 	search_fields = ['nombre', 'equipo__iniciales', 'equipo__nombre']
+	list_filter = ['activo']
 admin.site.register(Jugador, PlayerAdmin)
 
 admin.site.register(Jugada)

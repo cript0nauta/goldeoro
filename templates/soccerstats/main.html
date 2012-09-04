@@ -4,8 +4,12 @@
 
 <h1>Elija un partido para administrar</h1>
 
+<div class="grid">
+
 {% for partido in partidos %}
-	<div class="partido"><a href="/adminmatch/partido/{{ partido.id  }}/">{{ partido }}</a></div>
+	<div class="partido grid-cell"><a href="/partido-admin/{{ partido.id }}/">{{ partido }}</a></div>
 {% endfor %}
+
+</div>
 
 {% endblock %}

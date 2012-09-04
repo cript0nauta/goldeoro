@@ -8,9 +8,16 @@ class Equipo(models.Model):
 	def __unicode__(self):
 		return self.iniciales
 
+
+class Jugador(models.Model):
+	nombre = models.CharField(max_length = 60)
+	casaca = models.IntegerField()
+	equipo = models.ForeignKey(Equipo)
+	def __unicode__(self):
+		return self.nombre
+
 class Partido(models.Model):
 	equipos = models.ManyToManyField(Equipo)
 	def __unicode__(self):
 		return ' vs '.join([str(a) for a in self.equipos.all()]) 
-
 

@@ -21,3 +21,16 @@ class Partido(models.Model):
 	def __unicode__(self):
 		return ' vs '.join([str(a) for a in self.equipos.all()]) 
 
+class Jugada(models.Model):
+	partido = models.ForeignKey(Partido)
+	jugadores = models.ManyToManyField(Jugador)
+	tiempo = models.IntegerField()
+	contexto = models.CharField(max_length = 1, choices = (
+		('T', 'Tiro Libre'),
+		('L', 'Lateral'),
+		('C', 'Corner'),
+		('A', 'Saque de arco'),
+		('P', 'Pique'),
+		('M', 'Saque del medio'),
+		('P', 'Penal'),
+	), blank = True)

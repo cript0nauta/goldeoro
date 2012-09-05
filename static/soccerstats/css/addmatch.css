@@ -1,0 +1,37 @@
+body
+{
+	margin-left: 15%;
+	margin-right: 15%;
+}
+
+li
+{
+list-style: none;
+}
+
+.hay-once
+{
+	font-weight: bold;
+	color: green;
+}
+.no-hay-once
+{
+	color: red;
+}
+
+#submit
+{
+	text-align: center;
+	clear: both;
+}
+#submit a
+{
+	display: inline;
+	background: #0A0;
+	padding: 10px;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 10px;
+	text-decoration: none;
+	color: black
+}

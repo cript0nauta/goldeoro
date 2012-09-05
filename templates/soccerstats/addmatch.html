@@ -2,31 +2,35 @@
 
 {% block end %}
 <script src="{{ STATIC_URL }}soccerstats/js/addmatch.js" type="text/javascript"></script>
+<link rel="stylesheet" href="{{ STATIC_URL }}soccerstats/css/addmatch.css" />
 {% endblock %}
 
 {% block contenido %}
 
 <form action="/addmatch/" id="addmatch">
 	<div id="local" class="float-l">
-		<label for="test">Local</label>
-		<select name="test">
+		<label for="local">Local</label>
+		<select name="local">
 		<option value="0">Elija una opción</option>
 		{% for equipo in equipos %}
 			<option value="{{ equipo.id }}">{{ equipo.nombre }}</option>
 		{% endfor  %}
 		</select>
+		<p class="no-hay-once once">Eligió <span class="cantidad-jugadores">0</span> de 11 jugadores</p>
 		<ul class="jugadores"></ul>
 	</div>
 	<div id="visitante" class="float-r">
-		<select name="test">
+		<select name="visitante">
 		<option value="0">Elija una opción</option>
 		{% for equipo in equipos %}
 			<option value="{{ equipo.id }}">{{ equipo.nombre }}</option>
 		{% endfor  %}
 		</select>
-		<label for="test">Visitante</label>
+		<label for="visitante">Visitante</label>
+		<p class="no-hay-once once">Eligió <span class="cantidad-jugadores">0</span> de 11 jugadores</p>
 		<ul class="jugadores"></ul>
 	</div>
+	<div id="submit"><a href="#">Enviar</a></div>
 </form>
 
 {% endblock %}

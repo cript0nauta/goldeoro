@@ -298,23 +298,20 @@ textarea {
 }
 
 
-/* Grid */
-.grid-cell
+/* CSS by sh4r3m4n */
+
+.partido
 {
-	display:inline-block;
-	vertical-align:top;
-	width:50%;
-	letter-spacing:normal;
-	word-spacing:normal;
-	text-align:left;
-	text-rendering:auto
+	background-color: green;
+	color: white;
+	padding: 10px;
+	border-width: 2px;
+	border-radius: 5px;
+	display: inline-block;
+	margin: 5px;
+	float: left;
 }
-.grid-cell>*{
-	padding:0 15px
-}
-.grid{
-	margin:0 -15px;
-	letter-spacing:-.31em;
-	word-spacing:-.43em;
-	text-rendering:optimizespeed;
+.partido a
+{
+	color: white;
 }

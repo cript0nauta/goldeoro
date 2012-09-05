@@ -300,6 +300,11 @@ textarea {
 
 /* CSS by sh4r3m4n */
 
+body
+{
+	margin: 20px;
+}
+
 .partido
 {
 	background-color: green;
@@ -314,4 +319,18 @@ textarea {
 .partido a
 {
 	color: white;
+}
+
+.float-l
+{
+	float: left;
+}
+.float-r
+{
+	float: right
+}
+#addmatch
+{
+	margin-left: 15%;
+	margin-right: 15%;
 }

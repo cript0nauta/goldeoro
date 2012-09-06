@@ -20,9 +20,6 @@ def admin(request):
 		{'partidos' : Partido.objects.all()},
 		RequestContext(request))
 
-def partido_adm(request, match_id):
-	return HttpResponse('En construccion')
-
 def addmatch(request):
 	if not request.POST:
 		return render_to_response('soccerstats/addmatch.html',
@@ -51,3 +48,11 @@ def json_players(request, equipo):
 	jugadores = Jugador.objects.filter(equipo__pk=equipo)
 	jugadores = [{'pk':jugador.pk, 'nombre':jugador.nombre} for jugador in jugadores]
 	return HttpResponse(simplejson.dumps({'jugadores':jugadores}))
+
+def partido_adm(request, match_id):
+	equipo = Partido.objects.get(pk=match_id)
+	return render_to_response('soccerstats/partido-admin.html',
+			{
+				'partido' : equipo,
+				'jugadores': [equipo.jugadores.all()[:12], equipo.jugadores.all()[11:]],
+			}, RequestContext(request))

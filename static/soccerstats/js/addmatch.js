@@ -38,7 +38,15 @@ $(function(){
 		{
 			alert('Elige 11 jugadores de cada equipo')
 		}else{
-			alert('Bien');
+			// Crea una cadena con todos los jugadores que hay seleccionados
+			jugadores = '';
+			$('input:checked').each(function(){
+				jugadores += $(this).val() + ';';
+			});
+			jugadores = jugadores.substring(0,jugadores.length - 1);
+			input = $('<input type="hidden" name="jugadores">').attr('value',jugadores);
+			input.appendTo($('form'));
+			$('form').submit()
 		}
 		return false;
 	});

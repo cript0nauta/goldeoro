@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from soccerstats.models import *
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
@@ -24,10 +24,28 @@ def partido_adm(request, match_id):
 	return HttpResponse('En construccion')
 
 def addmatch(request):
-	return render_to_response('soccerstats/addmatch.html',
-	{
-		'equipos' : Equipo.objects.all(),
-	}, RequestContext(request))
+	if not request.POST:
+		return render_to_response('soccerstats/addmatch.html',
+		{
+			'equipos' : Equipo.objects.all(),
+		}, RequestContext(request))
+	else:
+		local = request.POST.get('local','')
+		local = Equipo.objects.get(pk=local)
+		
+		visitante = request.POST.get('visitante','')
+		visitante = Equipo.objects.get(pk=visitante)
+		
+		jugadores_ = request.POST.get('jugadores', '')
+		jugadores = []
+		for jugador in jugadores_.split(';'):
+			jugadores.append(Jugador.objects.get(pk=jugador))
+
+		partido = Partido.objects.create()
+		partido.equipos = [local, visitante]
+		partido.jugadores = jugadores
+		partido.save()
+		return HttpResponseRedirect('/adminmatch/')
 
 def json_players(request, equipo):
 	jugadores = Jugador.objects.filter(equipo__pk=equipo)

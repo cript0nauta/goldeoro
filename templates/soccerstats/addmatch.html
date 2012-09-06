@@ -7,7 +7,8 @@
 
 {% block contenido %}
 
-<form action="/addmatch/" id="addmatch">
+<form action="/addmatch/" id="addmatch" method="post">
+	{% csrf_token %}
 	<div id="local" class="float-l">
 		<label for="local">Local</label>
 		<select name="local">

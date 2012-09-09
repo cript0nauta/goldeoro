@@ -3,7 +3,11 @@
 {% block contenido %}
 
 <h1 id="tiempo">00:00 PT</h1>
-<p id="cambiaperiodo"><a href="#" id="comienza">Comenzar</a></p>
+<p id="cambiaperiodo">
+	<a href="#" id="comienza">Comenzar</a> <br />
+	<div id="relato">Partido no iniciado</div> 
+	<br />
+</p>
 <div class="equipo float-l">
 	<h3>{{ partido.equipos.all.0.nombre }}</h3>
 	<ul>
@@ -19,6 +23,16 @@
 			<li>{{ jugador.nombre }}</li>
 		{% endfor %}
 	</ul>
+</div>
+<div id="pausar">
+	<a href="#">Tiro Libre</a>
+	<a href="#">Lateral</a>
+	<a href="#">Corner</a>
+	<a href="#">Saque de arco</a>
+	<a href="#">Pique</a>
+	<a href="#">Saque del medio</a>
+	<a href="#">Penal</a>
+	<a href="#">Gol</a>
 </div>
 
 {% endblock %}

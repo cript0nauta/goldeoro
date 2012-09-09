@@ -27,6 +27,7 @@ class Jugada(models.Model):
 	partido = models.ForeignKey(Partido)
 	jugadores = models.ManyToManyField(Jugador)
 	tiempo = models.IntegerField()
+	periodo = models.IntegerField()
 	contexto = models.CharField(max_length = 1, choices = (
 		('T', 'Tiro Libre'),
 		('L', 'Lateral'),
@@ -35,4 +36,5 @@ class Jugada(models.Model):
 		('P', 'Pique'),
 		('M', 'Saque del medio'),
 		('P', 'Penal'),
+		('G', 'Gol'),
 	), blank = True)

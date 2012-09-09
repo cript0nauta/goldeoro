@@ -8,13 +8,26 @@ function zeroFill( number, width )
 	      return number + ""; // always return a string
 }
 
+$(function(){
+	$('.equipo').hide();
+});
 
+
+visibilidad = function(){
+	if($('.equipo').css('display') !== 'none'){
+		$('.equipo').hide(1000);
+	}else{
+		$('.equipo').show(1000);
+	}
+}
 $('#comienza').click(function(){
+	visibilidad();
 	segundos = 0;
 	periodo = 0;
 	periodos = ['PT','ET','ST'];
 	dura = [10,5,10];
 	fin = false;
+	$('#relato').text('Elija ejecutor de saque del medio');
 
 	setInterval(function(){
 		if(!fin){
@@ -33,11 +46,6 @@ $('#comienza').click(function(){
 				a.click(function(){
 					$(this).hide(1000);
 
-					if(periodo % 2 === 0){
-						$('.equipo').hide(1000);
-					}else{
-						$('.equipo').show(1000);
-					}
 
 					if(periodo + 1 !== periodos.length){
 						periodo += 1;
@@ -46,10 +54,25 @@ $('#comienza').click(function(){
 						$('#tiempo').text('Partido finalizado');
 						fin = true;
 					}
+					visibilidad();
+					if(periodo == 1)
+					{
+						console.log(5);
+						$('#relato').text('Entretiempo');
+					}else{
+						$('#relato').text('Elija ejecutor de saque del medio');
+					}
 				});
 			}
 		}
 	},1000);
 
 	$(this).hide(1000);
-})
+	return false;
+});
+
+$('li').click(function(){
+	li = $(this);
+	$('#relato').text('Tiene la pelota ' + li.text());
+});
+

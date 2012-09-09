@@ -32,11 +32,18 @@ $('#comienza').click(function(){
 				a.show(1000);
 				a.click(function(){
 					$(this).hide(1000);
+
+					if(periodo % 2 === 0){
+						$('.equipo').hide(1000);
+					}else{
+						$('.equipo').show(1000);
+					}
+
 					if(periodo + 1 !== periodos.length){
 						periodo += 1;
 						segundos = 0;
 					}else{
-						alert('The end');
+						$('#tiempo').text('Partido finalizado');
 						fin = true;
 					}
 				});

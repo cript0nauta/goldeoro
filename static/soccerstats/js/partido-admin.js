@@ -9,14 +9,21 @@ function zeroFill( number, width )
 }
 
 
-$(function(){
+$('#comienza').click(function(){
 	segundos = 0;
+	periodo = 0;
+	periodos = ['PT','ET','ST']
+
 	setInterval(function(){
 		segundos += 1;
 
 		minutos = zeroFill(parseInt(segundos / 60), 2);
 		segs = zeroFill(segundos % 60, 2);
 
-		$('#tiempo').text(minutos + ':' + segs + ' PT');
-	},1000)
+		$('#tiempo').text(minutos + ':' + segs + ' ' + periodos[periodo]);
+
+
+	},1000);
+
+	$(this).hide(1000);
 })

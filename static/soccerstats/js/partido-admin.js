@@ -12,17 +12,36 @@ function zeroFill( number, width )
 $('#comienza').click(function(){
 	segundos = 0;
 	periodo = 0;
-	periodos = ['PT','ET','ST']
+	periodos = ['PT','ET','ST'];
+	dura = [10,5,10];
+	fin = false;
 
 	setInterval(function(){
-		segundos += 1;
+		if(!fin){
+			segundos += 1;
 
-		minutos = zeroFill(parseInt(segundos / 60), 2);
-		segs = zeroFill(segundos % 60, 2);
+			minutos = zeroFill(parseInt(segundos / 60), 2);
+			segs = zeroFill(segundos % 60, 2);
 
-		$('#tiempo').text(minutos + ':' + segs + ' ' + periodos[periodo]);
+			$('#tiempo').text(minutos + ':' + segs + ' ' + periodos[periodo]);
 
-
+			if(segundos === dura[periodo]){
+				// Estamos listos para pasar de período
+				a = $('<a>').attr('href','#').text('Siguiente período').hide();
+				a.appendTo('#cambiaperiodo');
+				a.show(1000);
+				a.click(function(){
+					$(this).hide(1000);
+					if(periodo + 1 !== periodos.length){
+						periodo += 1;
+						segundos = 0;
+					}else{
+						alert('The end');
+						fin = true;
+					}
+				});
+			}
+		}
 	},1000);
 
 	$(this).hide(1000);

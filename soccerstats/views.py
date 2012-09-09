@@ -54,5 +54,5 @@ def partido_adm(request, match_id):
 	return render_to_response('soccerstats/partido-admin.html',
 			{
 				'partido' : equipo,
-				'jugadores': [equipo.jugadores.all()[:12], equipo.jugadores.all()[11:]],
+				'jugadores': [equipo.jugadores.all()[:11], equipo.jugadores.all()[11:]],
 			}, RequestContext(request))

@@ -8,6 +8,9 @@ function zeroFill( number, width )
 	      return number + ""; // always return a string
 }
 
+jugando = false; // Primer o segundo tiempo
+pausa = true; // Para medir si hacen tiempo
+
 $(function(){
 	$('.equipo').hide();
 });
@@ -21,6 +24,7 @@ visibilidad = function(){
 	}
 }
 $('#comienza').click(function(){
+	jugando = true;
 	visibilidad();
 	segundos = 0;
 	periodo = 0;
@@ -31,7 +35,7 @@ $('#comienza').click(function(){
 
 	setInterval(function(){
 		if(!fin){
-			segundos += 1;
+			segundos += 1
 
 			minutos = zeroFill(parseInt(segundos / 60), 2);
 			segs = zeroFill(segundos % 60, 2);
@@ -50,14 +54,19 @@ $('#comienza').click(function(){
 					if(periodo + 1 !== periodos.length){
 						periodo += 1;
 						segundos = 0;
+						if (periodo===1){
+							jugando = false;
+						}else{
+							jugando = true;
+						}
 					}else{
 						$('#tiempo').text('Partido finalizado');
 						fin = true;
+						jugando = false;
 					}
 					visibilidad();
 					if(periodo == 1)
 					{
-						console.log(5);
 						$('#relato').text('Entretiempo');
 					}else{
 						$('#relato').text('Elija ejecutor de saque del medio');
@@ -71,8 +80,34 @@ $('#comienza').click(function(){
 	return false;
 });
 
-$('li').click(function(){
-	li = $(this);
-	$('#relato').text('Tiene la pelota ' + li.text());
+$('.player').click(function(){
+	if($(this).hasClass('player')){
+		pausa = false;
+		li = $(this);
+		$('#relato').text('Tiene la pelota ' + li.text());
+
+		//Selecciona el elemento
+		$('.seleccionado').removeClass('seleccionado');
+		$(this).addClass('seleccionado');
+
+		// Vuelve seleccionables a todos los jugadores
+		$('.disable').addClass('player');
+		$('.disable').removeClass('disable');
+	}
 });
 
+$('.pelota-parada').click(function(){
+	if ( jugando && !pausa ){
+		pausa = true;
+		jugador = $('.seleccionado').text();
+		relato = $(this).text() + ' (' + jugador  + ').  Pausa. Elija lanzador del saque';
+		$('#relato').text(relato);
+
+		// Evitamos que se seleccionen del otro equipo
+		equipo = $('.seleccionado').parent();
+		jugadores = equipo.find('li');
+		jugadores.removeClass('player');
+		jugadores.addClass('disable')
+		$('.seleccionado').removeClass('seleccionado');
+	}
+});

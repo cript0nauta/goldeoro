@@ -6,10 +6,31 @@
 
 li
 {
+	/* No ponemos .player porque se puede deseleccionar */
 	list-style: none;
+	padding: 5px;
+	display: block;
+	-webkit-user-select: none;
 }
 h1, #cambiaperiodo
 {
 	text-align: center;
+}
+.seleccionado
+{
+	background: #A55;
+	display: inline;
+	color: white;
+}
+
+#pausar
+{
+	text-align: center;
+	clear: both;
+}
+
+.disable
+{
+	color: #AAA;
 }
 

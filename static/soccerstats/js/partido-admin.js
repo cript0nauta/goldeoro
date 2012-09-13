@@ -51,7 +51,6 @@ $('#comienza').click(function(){
 				a.click(function(){
 					$(this).hide(1000);
 					timestamp = new Date().getTime();
-
 					if(periodo + 1 !== periodos.length){
 						periodo += 1;
 						segundos = 0;
@@ -78,10 +77,12 @@ $('#comienza').click(function(){
 	},1000);
 
 	$(this).hide(1000);
+	log_comienza();
 	return false;
 });
 
 $('.player').click(function(){
+	log_player(jugadores[$(this).attr('id')]);
 	if($(this).hasClass('player')){
 		pausa = false;
 		li = $(this);

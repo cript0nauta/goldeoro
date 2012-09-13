@@ -12,7 +12,7 @@
 	<h3>{{ partido.equipos.all.0.nombre }}</h3>
 	<ul class="local">
 		{% for jugador in jugadores.0 %}
-		<li class="player" id="player-{{ jugador.pk }}">{{ jugador.casaca }} - {{ jugador.nombre }}</li>
+		<li class="player" id="{{ jugador.pk }}">{{ jugador.casaca }} - {{ jugador.nombre }}</li>
 		{% endfor %}
 	</ul>
 </div>
@@ -20,7 +20,7 @@
 	<h3>{{ partido.equipos.all.1.nombre }}</h3>
 	<ul class="visitante">
 		{% for jugador in jugadores.1 %}
-		<li class="player" id="player-{{ jugador.pk }}">{{ jugador.casaca }} - {{ jugador.nombre }}</li>
+		<li class="player" id="{{ jugador.pk }}">{{ jugador.casaca|ljust:"2" }} - {{ jugador.nombre }}</li>
 		{% endfor %}
 	</ul>
 </div>
@@ -35,8 +35,8 @@
 </div>
 
 <script type="text/javascript">
-	jugadores = [{% for jugador in jugadores.0 %}
-		{
+	jugadores = { {% for jugador in jugadores.0 %}
+		{{ jugador.pk }} : {
 			pk:	{{ jugador.pk }},
 			nombre:	"{{ jugador.nombre|escapejs }}",
 			casaca: {{ jugador.casaca }},
@@ -44,14 +44,14 @@
 		},
 	{% endfor %}
 	{% for jugador in jugadores.1 %}
-		{
+		{{ jugador.pk }} : {
 			pk:	{{ jugador.pk }},
 			nombre:	"{{ jugador.nombre|escapejs }}",
 			casaca: {{ jugador.casaca }},
-			equipo:	1,
+			equipo:	0,
 		},
 	{% endfor %}
-	]
+	}
 </script>
 
 {% endblock %}
@@ -62,4 +62,5 @@
 
 <link rel="stylesheet" href="{{ STATIC_URL }}/soccerstats/css/partido-admin.css" />
 <script src="{{ STATIC_URL }}soccerstats/js/partido-admin.js" type="text/javascript"></script>
+<script src="{{ STATIC_URL }}soccerstats/js/stats.js" type="text/javascript"></script>
 {% endblock  %}

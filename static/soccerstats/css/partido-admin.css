@@ -1,15 +1,9 @@
-.equipo
-{
-	/*width: 50%;
-	text-align: center;/*
-}
-
 li
 {
 	/* No ponemos .player porque se puede deseleccionar */
 	list-style: none;
 	-webkit-user-select: none;
-	display: none;
+	display: block;
 }
 h1, #cambiaperiodo
 {

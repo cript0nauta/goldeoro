@@ -12,7 +12,7 @@
 	<h3>{{ partido.equipos.all.0.nombre }}</h3>
 	<ul class="local">
 		{% for jugador in jugadores.0 %}
-			<li class="player">{{ jugador.nombre }}</li>
+		<li class="player" id="player-{{ jugador.pk }}">{{ jugador.casaca }} - {{ jugador.nombre }}</li>
 		{% endfor %}
 	</ul>
 </div>
@@ -20,7 +20,7 @@
 	<h3>{{ partido.equipos.all.1.nombre }}</h3>
 	<ul class="visitante">
 		{% for jugador in jugadores.1 %}
-			<li class="player">{{ jugador.nombre }}</li>
+		<li class="player" id="player-{{ jugador.pk }}">{{ jugador.casaca }} - {{ jugador.nombre }}</li>
 		{% endfor %}
 	</ul>
 </div>
@@ -33,6 +33,26 @@
 	<a href="#" class="pelota-parada">Penal</a>
 	<a href="#" class="pelota-parada">Gol</a>
 </div>
+
+<script type="text/javascript">
+	jugadores = [{% for jugador in jugadores.0 %}
+		{
+			pk:	{{ jugador.pk }},
+			nombre:	"{{ jugador.nombre|escapejs }}",
+			casaca: {{ jugador.casaca }},
+			equipo:	0,
+		},
+	{% endfor %}
+	{% for jugador in jugadores.1 %}
+		{
+			pk:	{{ jugador.pk }},
+			nombre:	"{{ jugador.nombre|escapejs }}",
+			casaca: {{ jugador.casaca }},
+			equipo:	1,
+		},
+	{% endfor %}
+	]
+</script>
 
 {% endblock %}
 

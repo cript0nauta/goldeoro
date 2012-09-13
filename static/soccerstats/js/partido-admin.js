@@ -24,6 +24,7 @@ visibilidad = function(){
 	}
 }
 $('#comienza').click(function(){
+	timestamp = new Date().getTime();
 	jugando = true;
 	visibilidad();
 	segundos = 0;
@@ -49,7 +50,7 @@ $('#comienza').click(function(){
 				a.show(1000);
 				a.click(function(){
 					$(this).hide(1000);
-
+					timestamp = new Date().getTime();
 
 					if(periodo + 1 !== periodos.length){
 						periodo += 1;
@@ -84,16 +85,24 @@ $('.player').click(function(){
 	if($(this).hasClass('player')){
 		pausa = false;
 		li = $(this);
-		$('#relato').text('Tiene la pelota ' + li.text());
 
-		//Selecciona el elemento
-		$('.seleccionado').removeClass('seleccionado');
-		$(this).addClass('seleccionado');
+		if(!$(this).hasClass('seleccionado')){
+			$('#relato').text('Tiene la pelota ' + li.text());
 
-		// Vuelve seleccionables a todos los jugadores
-		$('.disable').addClass('player');
-		$('.disable').removeClass('disable');
+			//Selecciona el elemento
+			$('.seleccionado').removeClass('seleccionado');
+			$(this).addClass('seleccionado');
+
+			// Vuelve seleccionables a todos los jugadores
+			$('.disable').addClass('player');
+			$('.disable').removeClass('disable');
+		}else{
+			// Está seleccionado, deseleccionamos
+			$('#relato').text('Nadie tiene la pelota');
+			$(this).removeClass('seleccionado');
+		}
 	}
+	return false;
 });
 
 $('.pelota-parada').click(function(){
@@ -110,4 +119,5 @@ $('.pelota-parada').click(function(){
 		jugadores.addClass('disable')
 		$('.seleccionado').removeClass('seleccionado');
 	}
+	return false;
 });

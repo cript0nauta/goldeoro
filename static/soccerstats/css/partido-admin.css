@@ -1,16 +1,15 @@
 .equipo
 {
-	width: 50%;
-	text-align: center;
+	/*width: 50%;
+	text-align: center;/*
 }
 
 li
 {
 	/* No ponemos .player porque se puede deseleccionar */
 	list-style: none;
-	padding: 5px;
-	display: block;
 	-webkit-user-select: none;
+	display: none;
 }
 h1, #cambiaperiodo
 {
@@ -25,7 +24,6 @@ h1, #cambiaperiodo
 
 #pausar
 {
-	text-align: center;
 	clear: both;
 }
 
@@ -34,3 +32,7 @@ h1, #cambiaperiodo
 	color: #AAA;
 }
 
+h3
+{
+	padding: 5px;
+}

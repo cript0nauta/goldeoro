@@ -32,9 +32,8 @@ log_player = function(jugador){
 			c = undefined
 		}
 		a = jugador.pk;
-		jugadas.push([tiempo - timestamp, 
-				periodo, 
-				(latiene && c) ? latiene.nombre : ( (latenia && c) ? latenia.nombre : undefined  ), 
+		jugadas.push([tiempo - timestamp, periodo, 
+				(latiene && !c) ? latiene.pk : ( (latenia && !c) ? latenia.pk : undefined  ), 
 				a, c, c ? true : undefined])
 		console.log([
 				(latiene && !c) ? latiene.nombre : ( (latenia && !c) ? latenia.nombre : undefined  ),

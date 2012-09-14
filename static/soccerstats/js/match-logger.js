@@ -40,6 +40,18 @@ log_player = function(jugador){
 				jugador.nombre,
 				c, c ? true : undefined]);
 		latiene = jugador;
+		if (c){
+			jugadas.push([tiempo - timestamp,
+					periodo,
+					latiene.pk,
+					undefined,
+					undefined,
+					undefined]);
+			console.log([latiene.nombre,
+					undefined,
+					undefined,
+					undefined]);
+		}
 	}
 }
 

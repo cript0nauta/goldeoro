@@ -10,6 +10,7 @@ function zeroFill( number, width )
 
 jugando = false; // Primer o segundo tiempo
 pausa = true; // Para medir si hacen tiempo
+contexto = 'SM';
 
 $(function(){
 	$('.equipo').hide();
@@ -82,7 +83,7 @@ $('#comienza').click(function(){
 });
 
 $('.player').click(function(){
-	log_player(jugadores[$(this).attr('id')]);
+	log_player(players[$(this).attr('id')]);
 	if($(this).hasClass('player')){
 		pausa = false;
 		li = $(this);
@@ -119,6 +120,9 @@ $('.pelota-parada').click(function(){
 		jugadores.removeClass('player');
 		jugadores.addClass('disable')
 		$('.seleccionado').removeClass('seleccionado');
+
+		// Para loguear
+		contexto = $(this).attr('contexto');
 	}
 	return false;
 });

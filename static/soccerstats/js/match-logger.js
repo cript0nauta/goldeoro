@@ -9,23 +9,33 @@ log_comienza = function(){
 
 log_player = function(jugador){
 	tiempo = new Date().getTime();
-	if ( $(this).hasClass('seleccionado') ){
+	if ( $('#'+jugador.pk).hasClass('seleccionado') ){
 		// Se quiere deseleccionar
 		latenia = latiene;
 		latiene = undefined;
-		jugadas.push([tiempo - timestamp, periodo, latenia,,]);
+		jugadas.push([tiempo - timestamp, periodo, latenia.pk,,]);
+		console.log([latenia.nombre,,]);
 	}else{
 		if (latiene){
 			de = latiene.pk
 		}else{
 			if (latenia){
-				de = latenia;
+				de = latenia.pk;
 			}else{
 				de = undefined;
 			}
 		}
+		if (pausa){
+			c = contexto
+		}else{
+			c = undefined
+		}
 		a = jugador.pk;
+		jugadas.push([tiempo - timestamp, periodo, de, a, c]);
+		console.log([
+				(latiene) ? latiene.nombre : ( (latenia) ? latenia.nombre : undefined  ),
+				jugador.nombre,
+				c]);
 		latiene = jugador;
-		jugadas.push([tiempo - timestamp, periodo, de, a,]);
 	}
 }

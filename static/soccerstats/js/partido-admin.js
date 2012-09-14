@@ -51,7 +51,9 @@ $('#comienza').click(function(){
 				a.show(1000);
 				a.click(function(){
 					$(this).hide(1000);
+					log_periodo();
 					timestamp = new Date().getTime();
+					pause = true;
 					if(periodo + 1 !== periodos.length){
 						periodo += 1;
 						segundos = 0;
@@ -72,6 +74,7 @@ $('#comienza').click(function(){
 					}else{
 						$('#relato').text('Elija ejecutor de saque del medio');
 					}
+					return false;
 				});
 			}
 		}

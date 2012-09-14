@@ -45,6 +45,39 @@ log_player = function(jugador){
 
 log_pelotaparada = function(){
 	tiempo = new Date().getTime();
-	jugadas.push([tiempo, periodo, latiene.pk, undefined, contexto, false]); // False porque no estamos sacando
-	console.log([ latiene.nombre, undefined, contexto, false  ]);
+	jugadas.push([tiempo - timestamp, 
+			periodo, 
+			latiene.pk, 
+			undefined, 
+			contexto, 
+			false]); // False porque no estamos sacando
+	console.log([ latiene.nombre, undefined, contexto, false ]);
+}
+
+log_periodo = function()
+{
+	tiempo = new Date().getTime();
+	if (latiene && !pausa)
+	{
+		jugadas.push([ tiempo - timestamp, 
+				periodo, 
+				latiene.pk, 
+				undefined, undefined, undefined ]);
+		console.log([latiene.nombre, undefined, undefined, undefined ]);
+	}
+}
+
+
+calcula_tiempos = function()
+{
+	for(i = 0; i < jugadas.length - 1; i++) // El último elemento del array no es necesario
+	{
+		// Con cada jugada
+		tiempo = jugadas[i+1][0] - jugadas[i][0];
+		if ( jugadas[i][3] ){
+			jugador = players[jugadas[i][3]];
+			console.log(jugador.nombre + '+=' + tiempo);
+		}
+	}
+
 }

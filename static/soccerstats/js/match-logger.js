@@ -88,7 +88,13 @@ calcula_tiempos = function()
 		tiempo = jugadas[i+1][0] - jugadas[i][0];
 		if ( jugadas[i][3] ){
 			jugador = players[jugadas[i][3]];
-			console.log(jugador.nombre + '+=' + tiempo);
+			// console.log(jugador.nombre + '+=' + tiempo);
+			if (jugador.posesion === undefined)
+			{
+				jugador.posesion = tiempo;
+			}else{
+				jugador.posesion += tiempo;
+			}
 		}
 	}
 

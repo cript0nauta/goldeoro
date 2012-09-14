@@ -123,6 +123,7 @@ $('.pelota-parada').click(function(){
 
 		// Para loguear
 		contexto = $(this).attr('contexto');
+		log_pelotaparada();
 	}
 	return false;
 });

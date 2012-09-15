@@ -15,7 +15,7 @@ log_player = function(jugador){
 		latenia = latiene;
 		latiene = undefined;
 		jugadas.push([tiempo - timestamp, periodo, latenia.pk, undefined, undefined, undefined]);
-		console.log([latenia.nombre]);
+		console.log([latenia.nombre, undefined, undefined, undefined]);
 	}else{
 		if (latiene){
 			de = latiene.pk

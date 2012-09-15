@@ -69,7 +69,7 @@ log_pelotaparada = function(){
 log_periodo = function()
 {
 	tiempo = new Date().getTime();
-	if (latiene && !pausa)
+	if (latiene && !pausa && periodo !== 1) // Ignoramos el entretiempo
 	{
 		jugadas.push([ tiempo - timestamp, 
 				periodo, 
@@ -77,6 +77,11 @@ log_periodo = function()
 				undefined, undefined, undefined ]);
 		console.log([latiene.nombre, undefined, undefined, undefined ]);
 	}
+	$('.seleccionado').removeClass('seleccionado');
+	contexto = 'SM';
+	latiene = undefined;
+	latenia = undefined;
+	pausa = true;
 }
 
 

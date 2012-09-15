@@ -9,6 +9,7 @@
 		players = {"23":{"pk":23,"nombre":"Valdés","casaca":1,"equipo":0,"posesion":31243},"24":{"pk":24,"nombre":"Dani Alves","casaca":2,"equipo":0,"posesion":78006},"25":{"pk":25,"nombre":"Puyol","casaca":5,"equipo":0,"posesion":8328},"26":{"pk":26,"nombre":"Piqué","casaca":3,"equipo":0,"posesion":20583},"27":{"pk":27,"nombre":"Abidal","casaca":22,"equipo":0,"posesion":35449},"28":{"pk":28,"nombre":"Sergio Busquets","casaca":16,"equipo":0,"posesion":28231},"29":{"pk":29,"nombre":"Xavi","casaca":6,"equipo":0,"posesion":47940},"30":{"pk":30,"nombre":"Cesc Fábregas","casaca":4,"equipo":0,"posesion":48896},"31":{"pk":31,"nombre":"Iniesta","casaca":8,"equipo":0,"posesion":61975},"32":{"pk":32,"nombre":"Messi","casaca":10,"equipo":0,"posesion":39847},"33":{"pk":33,"nombre":"Villa","casaca":7,"equipo":0,"posesion":41678},"67":{"pk":67,"nombre":"Cech","casaca":1,"equipo":1,"posesion":23578},"68":{"pk":68,"nombre":"Bosingwa","casaca":17,"equipo":1,"posesion":12990},"69":{"pk":69,"nombre":"Ivanovich","casaca":2,"equipo":1,"posesion":19534},"70":{"pk":70,"nombre":"Terry","casaca":26,"equipo":1,"posesion":14467},"71":{"pk":71,"nombre":"Ashley Cole","casaca":3,"equipo":1,"posesion":3932},"72":{"pk":72,"nombre":"Mickel","casaca":12,"equipo":1,"posesion":27462},"73":{"pk":73,"nombre":"Ramires","casaca":7,"equipo":1,"posesion":41257},"74":{"pk":74,"nombre":"Mata","casaca":10,"equipo":1,"posesion":47277},"75":{"pk":75,"nombre":"Lampard","casaca":8,"equipo":1,"posesion":47982},"76":{"pk":76,"nombre":"Torres","casaca":9,"equipo":1,"posesion":39896},"77":{"pk":77,"nombre":"Drogba","casaca":11,"equipo":1,"posesion":38264}};
 	</script>
 	<script>
+		equipos = ['Barcelona', 'Chelsea'];
 		$(function(){
 			// Calcular la posesión por equipo
 			pos = [0,0];
@@ -22,10 +23,13 @@
 			}
 			local = (100 * pos[0]) / (pos[0] + pos[1]) + 1;
 			visit = (100 * pos[1]) / (pos[0] + pos[1]);
-			result = 'Posesión : Local: ' + parseInt(local) + '%; Visitante: ' + parseInt(visit) + '%<br>';
+			result = 'Posesión : Local: ' + parseInt(local) + '%; Visitante: ' + parseInt(visit) + '%';
+			result = $('<p>').text(result);
+			$('#resultados').append(result);
 
 			// Calcular pases efectivos por equipo
 			pases = [0,0]
+			for(i in players){players[i].pases=0; players[i].malos=0;}
 			for (i in jugadas)
 			{
 				jugada = jugadas[i];
@@ -33,17 +37,29 @@
 				{
 					if (players[jugada[2]].equipo == players[jugada[3]].equipo)
 					{
-						pases[players[jugada[2]].equipo] += 1
+						pases[players[jugada[2]].equipo] += 1;
+						players[jugada[2]].pases += 1
 					}
 				}
 			}
-			result += 'Pases: Local: ' + pases[0] + '; Visitante: ' + pases[1] + '<br>';
+			result = 'Pases: Local: ' + pases[0] + '; Visitante: ' + pases[1];
+			result = $('<p>').text(result);
+			$('#resultados').append(result);
 
-			$('#resultados').html(result);
-
+			t = $('<table>');
+			for(i in players)
+			{
+				jugador = players[i];
+				tr = $('<tr>');
+				$('<td>').text(jugador.nombre).appendTo(tr);
+				$('<td>').text(jugador.equipo === 0 ? equipos[0] : equipos[1]).appendTo(tr);
+				$('<td>').text(jugador.pases).appendTo(tr);
+				tr.appendTo(t);
+			}
+			t.appendTo($('#resultados'));
 		})
 	</script>
 </head>
 <body>
-	<p id="resultados"></p>
+	<div id="resultados"></div>
 </html>

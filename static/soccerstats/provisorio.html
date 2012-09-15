@@ -22,7 +22,25 @@
 			}
 			local = (100 * pos[0]) / (pos[0] + pos[1]) + 1;
 			visit = (100 * pos[1]) / (pos[0] + pos[1]);
-			$('#resultados').text('Local: ' + parseInt(local) + '%; Visitante: ' + parseInt(visit) + '%')
+			result = 'Posesión : Local: ' + parseInt(local) + '%; Visitante: ' + parseInt(visit) + '%<br>';
+
+			// Calcular pases efectivos por equipo
+			pases = [0,0]
+			for (i in jugadas)
+			{
+				jugada = jugadas[i];
+				if (jugada[2] && jugada[3])
+				{
+					if (players[jugada[2]].equipo == players[jugada[3]].equipo)
+					{
+						pases[players[jugada[2]].equipo] += 1
+					}
+				}
+			}
+			result += 'Pases: Local: ' + pases[0] + '; Visitante: ' + pases[1] + '<br>';
+
+			$('#resultados').html(result);
+
 		})
 	</script>
 </head>

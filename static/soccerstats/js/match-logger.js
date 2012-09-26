@@ -84,23 +84,3 @@ log_periodo = function()
 	pausa = true;
 }
 
-
-calcula_tiempos = function()
-{
-	for(i = 0; i < jugadas.length - 1; i++) // El último elemento del array no es necesario
-	{
-		// Con cada jugada
-		tiempo = jugadas[i+1][0] - jugadas[i][0];
-		if ( jugadas[i][3] ){
-			jugador = players[jugadas[i][3]];
-			// console.log(jugador.nombre + '+=' + tiempo);
-			if (jugador.posesion === undefined)
-			{
-				jugador.posesion = tiempo;
-			}else{
-				jugador.posesion += tiempo;
-			}
-		}
-	}
-
-}

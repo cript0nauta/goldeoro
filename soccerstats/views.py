@@ -50,11 +50,11 @@ def json_players(request, equipo):
 	return HttpResponse(simplejson.dumps({'jugadores':jugadores}))
 
 def partido_adm(request, match_id):
-	equipo = Partido.objects.get(pk=match_id)
+	partido = get_object_or_404(Partido, pk = match_id)
 	return render_to_response('soccerstats/partido-admin.html',
 			{
-				'partido' : equipo,
-				'jugadores': [equipo.jugadores.all()[:11], equipo.jugadores.all()[11:]],
+				'partido' : partido,
+				'jugadores': [partido.jugadores.all()[:11], partido.jugadores.all()[11:]],
 			}, RequestContext(request))
 
 def finalizado(request):
@@ -72,4 +72,9 @@ def finalizado(request):
 	return HttpResponseRedirect('/adminmatch/')
 
 def matchlog(request, match_id):
-	return HttpResponse('Proximamente')
+	partido = get_object_or_404(Partido, pk = match_id)
+	return render_to_response('soccerstats/matchlog.html',
+			{
+				'partido' : partido,
+				'jugadores' : [partido.jugadores.all()[:11], partido.jugadores.all()[11:]],
+			}, RequestContext(request))

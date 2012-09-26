@@ -1,0 +1,37 @@
+{% extends 'soccerstats/base.html' %}
+
+{% block contenido %}
+
+<script type="text/javascript">
+	players = { {% for jugador in jugadores.0 %}
+		{{ jugador.pk }} : {
+			pk:	{{ jugador.pk }},
+			nombre:	"{{ jugador.nombre|escapejs }}",
+			casaca: {{ jugador.casaca }},
+			equipo:	0,
+		},
+	{% endfor %}
+	{% for jugador in jugadores.1 %}
+		{{ jugador.pk }} : {
+			pk:	{{ jugador.pk }},
+			nombre:	"{{ jugador.nombre|escapejs }}",
+			casaca: {{ jugador.casaca }},
+			equipo:	1,
+		},
+	{% endfor %}
+	}
+	jugadas = {{ partido.json|safe }};
+	equipos = [{% for equipo in partido.equipos.all %}
+		{
+		nombre: "{{ equipo.nombre|escapejs }}",
+		iniciales : "{{ equipo.iniciales|escapejs }}"
+		},
+	{% endfor %}
+	];
+</script>
+
+<div id="resultados"></div>
+
+{% endblock %}
+
+{% block end %}<script src="{{ STATIC_URL }}soccerstats/js/matchlog.js" type="text/javascript"></script> {% endblock %}

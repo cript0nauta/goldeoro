@@ -30,7 +30,56 @@
 	];
 </script>
 
-<div id="resultados"></div>
+<div id="resumen">
+	<table border="1">
+		<tr>
+			<th></th>
+			<th>{{ partido.equipos.all.0.nombre }}</th>
+			<th>{{ partido.equipos.all.1.nombre }}</th>
+		</tr>
+		<tr id="goles">
+			<td>Goles</td>
+			<td class="local">...</td>
+			<td class="visitante">...</td>
+		</tr>
+		<tr id="posesion">
+			<td>Posesion</td>
+			<td class="local">...</td>
+			<td class="visitante">...</td>
+		</tr>
+		<tr id="tiros">
+			<td>Tiros al arco</td>
+			<td class="local">...</td>
+			<td class="visitante">...</td>
+		</tr>
+		<tr id="pases">
+			<td>Pases totales</td>
+			<td class="local">...</td>
+			<td class="visitante">...</td>
+		</tr>
+		<tr id="presicion">
+			<td>Presición de los pases</td>
+			<td class="local">...</td>
+			<td class="visitante">...</td>
+		</tr>
+		<tr id="faltas">
+			<td>Faltas</td>
+			<td class="local">...</td>
+			<td class="visitante">...</td>
+		</tr>
+		<tr id="penales">
+			<td>Penales</td>
+			<td class="local">...</td>
+			<td class="visitante">...</td>
+		</tr>
+		<tr id="corners">
+			<td>Saques de esquina</td>
+			<td class="local"></td>
+			<td class="visitante"></td>
+		</tr>
+	</table>
+</div>
+<div id="individual"></div>
 
 {% endblock %}
 

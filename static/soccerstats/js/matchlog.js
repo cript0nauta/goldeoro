@@ -1,4 +1,39 @@
 $(function(){
+
+	//Goles, saques de arco, faltas y penales
+	parada = {
+		SM : [0,0],
+		SA : [0,0],
+		FA : [0,0],
+		TL : [0,0],
+		CO : [0,0],
+		LA : [0,0],
+		PE : [0,0],
+	}
+	for(i=0; i<jugadas.length; i++){
+		jugada = jugadas[i];
+		if(jugada[4] && !jugada[5]){
+			equipo = players[jugada[2]].equipo;
+			parada[jugada[4]][equipo] += 1;
+		}
+	}
+	$('#goles .local').text(parada.SM[0]);
+	$('#goles .visitante').text(parada.SM[1]);
+
+	$('#faltas .local').text(parada.TL[1]);
+	$('#faltas .visitante').text(parada.TL[0]);
+
+	$('#penales .local').text(parada.PE[1]);
+	$('#penales .visitante').text(parada.PE[0]);
+
+	$('#tiros .local').text(parada.SA[0] + parada.SM[0]);
+	$('#tiros .visitante').text(parada.SA[1] + parada.SM[1]);
+
+	$('#corners .local').text(parada.CO[1]);
+	$('#corners .visitante').text(parada.CO[0]);
+
+
+
 	// Le asigna a cada jugador los milisegundos que estuvo con la pelota
 	for(i = 0; i < jugadas.length - 1; i++) // El último elemento del array no es necesario
 	{
@@ -30,11 +65,12 @@ $(function(){
 	local = (100 * pos[0]) / (pos[0] + pos[1]) + 1;
 	visit = (100 * pos[1]) / (pos[0] + pos[1]);
 	result = 'Posesión : Local: ' + parseInt(local) + '%; Visitante: ' + parseInt(visit) + '%';
-	result = $('<p>').text(result);
-	$('#resultados').append(result);
+	$('#posesion .local').text(parseInt(local) + '%');
+	$('#posesion .visitante').text(parseInt(visit) + '%');
 
 	// Calcular pases efectivos por equipo
-	pases = [0,0]
+	pases = [0,0];
+	buenos = [0,0];
 	for (i in jugadas)
 	{
 		jugada = jugadas[i];
@@ -43,15 +79,20 @@ $(function(){
 			if (players[jugada[2]].equipo == players[jugada[3]].equipo)
 			{
 				pases[players[jugada[2]].equipo] += 1;
+				buenos[players[jugada[2]].equipo] += 1;
 				players[jugada[2]].pases += 1
 			}else{
+				pases[players[jugada[2]].equipo] += 1;
 				players[jugada[2]].malos += 1
 			}
 		}
 	}
 	result = 'Pases: Local: ' + pases[0] + '; Visitante: ' + pases[1];
-	result = $('<p>').text(result);
-	$('#resultados').append(result);
+	$('#pases .local').text(pases[0]);
+	$('#pases .visitante').text(pases[1]);
+
+	$('#presicion .local').text(parseInt((buenos[0] * 100) / pases[0]) + '%');
+	$('#presicion .visitante').text(parseInt((buenos[1] * 100) / pases[1]) + '%');
 
 	t = $('<table>').attr('border','1');
 	tr = $('<tr>');
@@ -74,5 +115,5 @@ $(function(){
 		$('<td>').text(parseInt( (100 * jugador.posesion) / (pos[0] + pos[1])  ) + '%').appendTo(tr);
 		tr.appendTo(t);
 	}
-	t.appendTo($('#resultados'));
+	t.appendTo($('#individual'));
 })

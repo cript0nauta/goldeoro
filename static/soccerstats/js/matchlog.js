@@ -87,15 +87,17 @@ $(function(){
 			}
 		}
 	}
-	result = 'Pases: Local: ' + pases[0] + '; Visitante: ' + pases[1];
 	$('#pases .local').text(pases[0]);
 	$('#pases .visitante').text(pases[1]);
 
 	$('#presicion .local').text(parseInt((buenos[0] * 100) / pases[0]) + '%');
 	$('#presicion .visitante').text(parseInt((buenos[1] * 100) / pases[1]) + '%');
 
+
+	// Tabla individual de jugadores, pases y posesión
 	t = $('<table>').attr('border','1');
 	tr = $('<tr>');
+	$('<th>').text('N°').appendTo(tr);
 	$('<th>').text('Nombre').appendTo(tr);
 	$('<th>').text('Equipo').appendTo(tr);
 	$('<th>').text('Pases buenos').appendTo(tr);
@@ -107,6 +109,7 @@ $(function(){
 	{
 		jugador = players[i];
 		tr = $('<tr>');
+		$('<td>').text(jugador.casaca).appendTo(tr);
 		$('<td>').text(jugador.nombre).appendTo(tr);
 		$('<td>').text(jugador.equipo === 0 ? equipos[0].iniciales : equipos[1].iniciales).appendTo(tr);
 		$('<td>').text(jugador.pases).appendTo(tr);

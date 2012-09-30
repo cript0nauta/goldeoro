@@ -66,7 +66,7 @@
 				$('<td>').text(jugador.pases).appendTo(tr);
 				$('<td>').text(jugador.malos).appendTo(tr);
 				$('<td>').text(parseInt((jugador.pases * 100)  / (jugador.malos + jugador.pases)) + '%').appendTo(tr);
-				$('<td>').text(( (100 * jugador.posesion) / (pos[0] + pos[1])  ) + '%').appendTo(tr);
+				$('<td>').text(parseInt( (100 * jugador.posesion) / (pos[0] + pos[1])  ) + '%').appendTo(tr);
 				tr.appendTo(t);
 			}
 			t.appendTo($('#resultados'));

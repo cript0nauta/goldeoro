@@ -20,6 +20,7 @@ class Jugador(models.Model):
 class Partido(models.Model):
 	equipos = models.ManyToManyField(Equipo)
 	jugadores = models.ManyToManyField(Jugador)
+	json = models.TextField()
 	def __unicode__(self):
 		return ' vs '.join([str(a) for a in self.equipos.all()]) 
 

@@ -14,7 +14,7 @@ log_player = function(jugador){
 		// Se quiere deseleccionar
 		latenia = latiene;
 		latiene = undefined;
-		jugadas.push([tiempo - timestamp, periodo, latenia.pk, undefined, undefined, undefined]);
+		jugadas.push([tiempo - timestamp, tiempo_bin, latenia.pk, undefined, undefined, undefined]);
 		console.log([latenia.nombre, undefined, undefined, undefined]);
 	}else{
 		if (latiene){
@@ -32,7 +32,7 @@ log_player = function(jugador){
 			c = undefined
 		}
 		a = jugador.pk;
-		jugadas.push([tiempo - timestamp, periodo, 
+		jugadas.push([tiempo - timestamp, tiempo_bin, 
 				(latiene && !c) ? latiene.pk : ( (latenia && !c) ? latenia.pk : undefined  ), 
 				a, c, c ? true : undefined])
 		console.log([
@@ -42,7 +42,7 @@ log_player = function(jugador){
 		latiene = jugador;
 		if (c){
 			jugadas.push([tiempo - timestamp,
-					periodo,
+					tiempo_bin,
 					latiene.pk,
 					undefined,
 					undefined,
@@ -58,7 +58,7 @@ log_player = function(jugador){
 log_pelotaparada = function(){
 	tiempo = new Date().getTime();
 	jugadas.push([tiempo - timestamp, 
-			periodo, 
+			tiempo_bin, 
 			latiene.pk, 
 			undefined, 
 			contexto, 
@@ -69,10 +69,10 @@ log_pelotaparada = function(){
 log_periodo = function()
 {
 	tiempo = new Date().getTime();
-	if (latiene && !pausa && periodo !== 1) // Ignoramos el entretiempo
+	if (latiene && !pausa && tiempo_bin !== 1) // Ignoramos el entretiempo
 	{
 		jugadas.push([ tiempo - timestamp, 
-				periodo, 
+				tiempo_bin, 
 				latiene.pk, 
 				undefined, undefined, undefined ]);
 		console.log([latiene.nombre, undefined, undefined, undefined ]);

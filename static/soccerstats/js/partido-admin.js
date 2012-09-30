@@ -34,6 +34,7 @@ $('#comienza').click(function(){
 	dura = [10,5,10];
 	fin = false;
 	$('#relato').text('Elija ejecutor de saque del medio');
+	tiempo_bin = 0;
 
 	setInterval(function(){
 		if(!fin){
@@ -54,6 +55,7 @@ $('#comienza').click(function(){
 					log_periodo();
 					timestamp = new Date().getTime();
 					pause = true;
+					tiempo_bin = 1;
 					if(periodo + 1 !== periodos.length){
 						periodo += 1;
 						segundos = 0;
@@ -66,6 +68,10 @@ $('#comienza').click(function(){
 						$('#tiempo').text('Partido finalizado');
 						fin = true;
 						jugando = false;
+
+						$('<input type="hidden" name="json">').val(JSON.stringify(jugadas)).appendTo($('#finalizado'));
+						$('<input type="submit" value="Enviar datos">').appendTo($('#finalizado'));
+
 					}
 					visibilidad();
 					if(periodo == 1)

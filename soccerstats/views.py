@@ -56,3 +56,20 @@ def partido_adm(request, match_id):
 				'partido' : equipo,
 				'jugadores': [equipo.jugadores.all()[:11], equipo.jugadores.all()[11:]],
 			}, RequestContext(request))
+
+def finalizado(request):
+	if(request.method != 'POST'):
+		return HttpResponse('La request debe ser en formato POST')
+	
+	partido_id = request.POST.get('partido','')
+	json = request.POST.get('json','')
+	if not(partido_id and json):
+		return HttpResponse('Los campos no estan correctamente completados')
+	
+	partido = get_object_or_404(Partido, pk=partido_id)
+	partido.json = json
+	partido.save()
+	return HttpResponseRedirect('/adminmatch/')
+
+def matchlog(request, match_id):
+	return HttpResponse('Proximamente')

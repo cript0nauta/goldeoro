@@ -6,6 +6,10 @@
 <p id="cambiaperiodo">
 	<a href="#" id="comienza">Comenzar</a> <br />
 	<div id="relato">Partido no iniciado</div> 
+	<form id="finalizado" action="/finalizado/" method="POST">
+		<input type="hidden" name="partido" value="{{ partido.pk }}" />
+		{% csrf_token %}
+	</form>
 	<br />
 </p>
 <div class="equipo float-l">

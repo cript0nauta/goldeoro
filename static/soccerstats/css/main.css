@@ -307,7 +307,7 @@ body
 
 .partido
 {
-	background-color: green;
+	background-color: red;
 	color: white;
 	padding: 10px;
 	border-width: 2px;
@@ -315,6 +315,10 @@ body
 	display: inline-block;
 	margin: 5px;
 	float: left;
+}
+.jugado
+{
+	background-color: green;
 }
 .partido a
 {

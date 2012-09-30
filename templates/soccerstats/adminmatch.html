@@ -8,7 +8,9 @@
 <div class="grid">
 
 {% for partido in partidos %}
-	<div class="partido"><a href="/partido-admin/{{ partido.id }}/">{{ partido }}</a></div>
+	<div class="partido {% if partido.json %}jugado{% endif  %}">
+		<a href="{% if not partido.json %}/partido-admin/{{ partido.id }}/{% else %}/matchlog/{{ partido.id  }}/{% endif%}">{{ partido }}</a>
+	</div>
 {% endfor %}
 
 </div>

@@ -132,17 +132,20 @@ $(function(){
 		// Realizamos todo lo necesario
 		jugador_pk = $(this).attr('href').substring(1);
 		jugador = players[jugador_pk];
-		pases_player={}
+		pases_player = {};
+		for(k in players){ pases_player[k] = [0,0] }
 		for(i=0; i<jugadas.length; i++){
 			jugada = jugadas[i];
+
 			if ( jugada[2] == jugador_pk ) {
 				if (jugada[3]){ // A qué jugador
-					if(pases_player[jugada[3]]){
-						// Ya le dio un pase antes
-						pases_player[jugada[3]] += 1;
-					}else{
-						pases_player[jugada[3]] = 1;
-					}
+					pases_player[jugada[3]][0] += 1;
+				}
+			}
+
+			if ( jugada[3] == jugador_pk ) {
+				if (jugada[2]){ // De qué jugador
+					pases_player[jugada[2]][1] += 1;
 				}
 			}
 		}
@@ -153,16 +156,18 @@ $(function(){
 		table = $('<table border="1">');
 			tr = $('<tr>');
 			tr.append($('<th>').text('Nombre'));
-			tr.append($('<th>').text('Equipo'));
-			tr.append($('<th>').text('Pases que le dio'));
+			tr.append($('<th>').text('Pases dados'));
+			tr.append($('<th>').text('Pases recibidos'));
 			tr.appendTo(table);
 		for(k in pases_player){
-			jugador = players[k];
-			tr = $('<tr>');
-			$('<td>').text(jugador.nombre).appendTo(tr);
-			$('<td>').text(equipos[jugador.equipo].iniciales).appendTo(tr);
-			$('<td>').text(pases_player[k]).appendTo(tr);
-			tr.appendTo(table);
+			jugador_tabla = players[k];
+			if(jugador.equipo === jugador_tabla.equipo){
+				tr = $('<tr>');
+				$('<td>').text(jugador_tabla.nombre).appendTo(tr);
+				$('<td>').text(pases_player[k][0]).appendTo(tr);
+				$('<td>').text(pases_player[k][1]).appendTo(tr);
+				tr.appendTo(table);
+			}
 		}
 		tr.appendTo(table);
 		table.appendTo(dialog);

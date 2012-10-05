@@ -34,10 +34,11 @@ $(function(){
 
 
 
-	// Le asigna a cada jugador los milisegundos que estuvo con la pelota
 	for(i = 0; i < jugadas.length - 1; i++) // El último elemento del array no es necesario
 	{
 		// Con cada jugada
+		
+		// Le asigna a cada jugador los milisegundos que estuvo con la pelota
 		tiempo = jugadas[i+1][0] - jugadas[i][0];
 		if ( jugadas[i][3] ){
 			jugador = players[jugadas[i][3]];
@@ -110,7 +111,9 @@ $(function(){
 		jugador = players[i];
 		tr = $('<tr>');
 		$('<td>').text(jugador.casaca).appendTo(tr);
-		$('<td>').text(jugador.nombre).appendTo(tr);
+		href = $('<a class="nombre-jugador">');
+		href.attr('href','#' + jugador.pk).text(jugador.nombre);
+		$('<td>').append(href).appendTo(tr);
 		$('<td>').text(jugador.equipo === 0 ? equipos[0].iniciales : equipos[1].iniciales).appendTo(tr);
 		$('<td>').text(jugador.pases).appendTo(tr);
 		$('<td>').text(jugador.malos).appendTo(tr);
@@ -119,4 +122,51 @@ $(function(){
 		tr.appendTo(t);
 	}
 	t.appendTo($('#individual'));
+
+	$('.nombre-jugador').click(function(){
+		//Abrimos el cuadro de diálogo
+		dialog = $('#pases-from')
+		dialog.html('Cargando...');
+		dialog.dialog();
+
+		// Realizamos todo lo necesario
+		jugador_pk = $(this).attr('href').substring(1);
+		jugador = players[jugador_pk];
+		pases_player={}
+		for(i=0; i<jugadas.length; i++){
+			jugada = jugadas[i];
+			if ( jugada[2] == jugador_pk ) {
+				if (jugada[3]){ // A qué jugador
+					if(pases_player[jugada[3]]){
+						// Ya le dio un pase antes
+						pases_player[jugada[3]] += 1;
+					}else{
+						pases_player[jugada[3]] = 1;
+					}
+				}
+			}
+		}
+
+		// Lo volcamos al diálogo
+		dialog.html('');
+		$('<h3>').text(jugador.nombre).appendTo(dialog);
+		table = $('<table border="1">');
+			tr = $('<tr>');
+			tr.append($('<th>').text('Nombre'));
+			tr.append($('<th>').text('Equipo'));
+			tr.append($('<th>').text('Pases que le dio'));
+			tr.appendTo(table);
+		for(k in pases_player){
+			jugador = players[k];
+			tr = $('<tr>');
+			$('<td>').text(jugador.nombre).appendTo(tr);
+			$('<td>').text(equipos[jugador.equipo].iniciales).appendTo(tr);
+			$('<td>').text(pases_player[k]).appendTo(tr);
+			tr.appendTo(table);
+		}
+		tr.appendTo(table);
+		table.appendTo(dialog);
+	});
+
+	return false;
 })

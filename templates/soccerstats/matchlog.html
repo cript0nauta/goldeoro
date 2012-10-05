@@ -81,6 +81,14 @@
 </div>
 <div id="individual"></div>
 
+<div id="pases-from" title="Pases" class="dialog">
+</div>
+
 {% endblock %}
 
-{% block end %}<script src="{{ STATIC_URL }}soccerstats/js/matchlog.js" type="text/javascript"></script> {% endblock %}
+{% block end %}
+	<script src="{{ STATIC_URL }}soccerstats/js/matchlog.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="{{ STATIC_URL }}soccerstats/css/matchlog.css" />
+	<link rel="stylesheet" href="{{ STATIC_URL }}soccerstats/css/jquery-ui.css" />
+	<script src="{{ STATIC_URL }}soccerstats/js/jquery-ui.min.js" type="text/javascript"></script>
+{% endblock %}

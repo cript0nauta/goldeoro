@@ -1,0 +1,9 @@
+.dialog
+{
+	display: none;
+}
+
+.nombre-jugador:visited
+{
+	color: blue;
+}

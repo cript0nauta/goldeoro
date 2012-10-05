@@ -125,13 +125,14 @@ $(function(){
 
 	$('.nombre-jugador').click(function(){
 		//Abrimos el cuadro de diálogo
-		dialog = $('#pases-from')
+		dialog = $('<div class=".dialog">');
 		dialog.html('Cargando...');
+		jugador_pk = $(this).attr('href').substring(1);
+		jugador = players[jugador_pk];
+		dialog.attr('title',jugador.nombre);
 		dialog.dialog();
 
 		// Realizamos todo lo necesario
-		jugador_pk = $(this).attr('href').substring(1);
-		jugador = players[jugador_pk];
 		pases_player = {};
 		for(k in players){ pases_player[k] = [0,0] }
 		for(i=0; i<jugadas.length; i++){
@@ -152,7 +153,6 @@ $(function(){
 
 		// Lo volcamos al diálogo
 		dialog.html('');
-		$('<h3>').text(jugador.nombre).appendTo(dialog);
 		table = $('<table border="1">');
 			tr = $('<tr>');
 			tr.append($('<th>').text('Nombre'));

@@ -19,7 +19,8 @@ procesa = function(data, i){
 			plantel = $('.' + (jugador.equipo == 0 ? 'local' : 
 						'visitante'));
 			li = $('<li>').attr('id',jugador.pk).addClass('player');
-			li.text(jugador.nombre);
+			fill = jugador.casaca < 9 ? '0' : '';
+			li.text(fill + jugador.casaca + ' - ' + jugador.nombre);
 			li.appendTo(plantel);
 		}
 		ajax_finish = true;

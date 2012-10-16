@@ -24,6 +24,9 @@ visibilidad = function(){
 		$('.equipo').show(1000);
 	}
 }
+
+partido_admin = function(){
+
 $('#comienza').click(function(){
 	timestamp = new Date().getTime();
 	jugando = true;
@@ -136,3 +139,5 @@ $('.pelota-parada').click(function(){
 	}
 	return false;
 });
+
+}

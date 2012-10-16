@@ -46,7 +46,11 @@ def addmatch(request):
 
 def json_players(request, equipo):
 	jugadores = Jugador.objects.filter(equipo__pk=equipo)
-	jugadores = [{'pk':jugador.pk, 'nombre':jugador.nombre} for jugador in jugadores]
+	jugadores = [{
+			'pk':jugador.pk, 
+			'nombre':jugador.nombre,
+			'casaca':jugador.casaca,
+		} for jugador in jugadores]
 	return HttpResponse(simplejson.dumps({'jugadores':jugadores}))
 
 def partido_adm(request, match_id):

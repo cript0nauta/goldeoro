@@ -35,6 +35,8 @@ for(i=0; i<2; i++)
 	equipo = equipos[i]
 	div = $('<div class="equipo float-l">');
 	div.append($('<h3>').text(equipo.nombre));
+	cambio = $('<a href="#">').addClass('cambio').attr('id', i)
+		.text('Cambio').appendTo(div);
 	$.ajax({
 		'url' : '/json/players/'+equipo.pk,
 		'dataType' : 'json', success: 

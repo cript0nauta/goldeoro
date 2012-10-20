@@ -16,11 +16,11 @@ procesa = function(data, i){
 		{
 			jugador = titulares[i];
 			jugador = players[jugador];
-			plantel = $('.' + (jugador.equipo == 0 ? 'local' : 
-						'visitante'));
 			li = $('<li>').attr('id',jugador.pk).addClass('player');
 			fill = jugador.casaca < 9 ? '0' : '';
 			li.text(fill + jugador.casaca + ' - ' + jugador.nombre);
+			plantel = $('.' + (jugador.equipo == 0 ? 'local' : 
+								'visitante'));
 			li.appendTo(plantel);
 		}
 		ajax_finish = true;

@@ -12,51 +12,17 @@
 	</form>
 	<br />
 </p>
-{% comment %}<div class="equipo float-l">
-	<h3>{{ partido.equipos.all.0.nombre }}</h3>
-	<ul class="local">
-		{% for jugador in jugadores.0 %}
-		<li class="player" id="{{ jugador.pk }}">{{ jugador.casaca }} - {{ jugador.nombre }}</li>
-		{% endfor %}
-	</ul>
-</div>
-<div class="equipo float-l">
-	<h3>{{ partido.equipos.all.1.nombre }}</h3>
-	<ul class="visitante">
-		{% for jugador in jugadores.1 %}
-		<li class="player" id="{{ jugador.pk }}">{{ jugador.casaca|ljust:"2" }} - {{ jugador.nombre }}</li>
-		{% endfor %}
-	</ul>
-</div>{% endcomment  %}
 <div id="panel-equipos"></div>
 <div id="pausar">
 	<a href="#" class="pelota-parada" contexto="TL">Tiro Libre</a>
 	<a href="#" class="pelota-parada" contexto="LA">Lateral</a>
 	<a href="#" class="pelota-parada" contexto="CO">Corner</a>
 	<a href="#" class="pelota-parada" contexto="SA">Saque de arco</a>
-	<!--<a href="#">Pique</a> -->
 	<a href="#" class="pelota-parada" contexto="PE">Penal</a>
 	<a href="#" class="pelota-parada" contexto="SM">Gol</a>
 </div>
 
 <script type="text/javascript">
-	/*players = { {% for jugador in jugadores.0 %}
-		{{ jugador.pk }} : {
-			pk:	{{ jugador.pk }},
-			nombre:	"{{ jugador.nombre|escapejs }}",
-			casaca: {{ jugador.casaca }},
-			equipo:	0,
-		},
-	{% endfor %}
-	{% for jugador in jugadores.1 %}
-		{{ jugador.pk }} : {
-			pk:	{{ jugador.pk }},
-			nombre:	"{{ jugador.nombre|escapejs }}",
-			casaca: {{ jugador.casaca }},
-			equipo:	1,
-		},
-	{% endfor %}
-	}*/
 	equipos = [{% for equipo in partido.equipos.all %}
 		{
 		nombre: "{{ equipo.nombre|escapejs }}",
@@ -77,6 +43,6 @@
 {% block end %}
 <link rel="stylesheet" href="{{ STATIC_URL }}/soccerstats/css/partido-admin.css" />
 <script src="{{ STATIC_URL }}soccerstats/js/ajax-admin.js" type="text/javascript"></script>
-<script src="{{ STATIC_URL }}soccerstats/js/match-logger.js" type="text/javascript"></script>
+<script src="{{ STATIC_URL }}soccerstats/js/relator.js" type="text/javascript"></script>
 <script src="{{ STATIC_URL }}soccerstats/js/partido-admin.js" type="text/javascript"></script>
 {% endblock  %}

@@ -169,7 +169,7 @@ $(function(){
 				$('<td>').text(jugador_tabla.nombre).appendTo(tr);
 				$('<td>').text(pases_player[k][0]).appendTo(tr);
 				$('<td>').text(pases_player[k][1]).appendTo(tr);
-				tr.appendTo(table);
+				if(pases_player[k][0]) tr.appendTo(table);
 			}
 		}
 		tr.appendTo(table);

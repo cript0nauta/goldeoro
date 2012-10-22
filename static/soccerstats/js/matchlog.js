@@ -99,7 +99,20 @@ $(function(){
 
 
 	// Tabla individual de jugadores, pases y posesión
-	t = $('<table>').attr('border','1');
+	
+	oculta = $('<a href="#" id="ocultatabla">').text('Mostrar tabla').click(function(){
+		x = $('#tablaindividual');
+		if(x.css('display') == 'none'){
+			$(this).text('Ocultar tabla');
+			x.css('display','block');
+		}else{
+			$(this).text('Mostrar tabla');
+			x.css('display','none');
+		}
+	});
+	oculta.prependTo($('#individual'))
+
+	t = $('<table>').attr('border','1').attr('id','tablaindividual').css('display','none');
 	tr = $('<tr>');
 	$('<th>').text('N°').appendTo(tr);
 	$('<th>').text('Nombre').appendTo(tr);

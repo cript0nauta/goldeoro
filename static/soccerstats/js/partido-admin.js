@@ -34,10 +34,11 @@ $('#comienza').click(function(){
 	segundos = 0;
 	periodo = 0;
 	periodos = ['PT','ET','ST'];
-	dura = [2700,5,2700];
+	dura = [10,5,10];
 	fin = false;
 	$('#relato').text('Elija ejecutor de saque del medio');
 	tiempo_bin = 0;
+	primera_pelota = true;
 
 	setInterval(function(){
 		if(!fin){
@@ -54,6 +55,7 @@ $('#comienza').click(function(){
 				a.appendTo('#cambiaperiodo');
 				a.show(1000);
 				a.click(function(){
+					primera_pelota = true;
 					$(this).hide(1000);
 					log_periodo();
 					timestamp = new Date().getTime();
@@ -95,6 +97,7 @@ $('#comienza').click(function(){
 });
 
 $('.player').click(function(){
+	if (primera_pelota) { primera_pelota = false; segundos = 0 }
 	log_player(players[$(this).attr('id')]);
 	if($(this).hasClass('player')){
 		pausa = false;

@@ -34,7 +34,7 @@ $('#comienza').click(function(){
 	segundos = 0;
 	periodo = 0;
 	periodos = ['PT','ET','ST'];
-	dura = [10,5,10];
+	dura = [2700,5,2700];
 	fin = false;
 	$('#relato').text('Elija ejecutor de saque del medio');
 	tiempo_bin = 0;

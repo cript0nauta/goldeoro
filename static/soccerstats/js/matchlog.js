@@ -36,7 +36,7 @@ $(function(){
 	$('#corners .visitante').text(parada.CO[0]);
 
 
-
+	for(i in players) players[i].posesion=0
 	for(i = 0; i < jugadas.length - 1; i++) // El último elemento del array no es necesario
 	{
 		// Con cada jugada
@@ -46,12 +46,7 @@ $(function(){
 		if ( jugadas[i][3] ){
 			jugador = players[jugadas[i][3]];
 			// console.log(jugador.nombre + '+=' + tiempo);
-			if (jugador.posesion === undefined)
-			{
-				jugador.posesion = tiempo;
-			}else{
-				jugador.posesion += tiempo;
-			}
+			jugador.posesion += tiempo;
 		}
 	}
 
@@ -188,6 +183,59 @@ $(function(){
 		tr.appendTo(table);
 		table.appendTo(dialog);
 	});
+
+	// Generamos el gráfico con pases buenos y pelotas perdidas por jugador
+	
+	bar = $('<canvas height="200px" width="700px" id="graph-pases">');
+	bar.text('Actualiza el navegador para ver los gráficos');
+	bar.appendTo($('#graficos'));
+	
+	leyendas = [];
+	data = [];
+	tooltips = [];
+	for(i in players){
+		player = players[i];
+		if(player.pases){
+			tooltip = player.nombre + '<br>Equipo: ' + 
+				equipos[player.equipo].nombre + 
+				'<br>Pases: ' + player.pases +
+				'<br>Perdidos: ' + player.malos;
+			tooltips.push(tooltip);
+			tooltips.push(tooltip);
+			txt = equipos[player.equipo].iniciales;
+			txt += ' ';
+			txt += player.casaca;
+			//leyendas.push(txt)
+			data.push([player.pases, player.malos]);
+		}
+	}
+
+	graph = new RGraph.Bar('graph-pases', data);
+	graph.Set('chart.tooltips', tooltips);
+	graph.Set('chart.tooltips.event', 'onmousemove');
+	graph.Set('chart.gutter.left',35);
+	graph.Draw();
+
+
+	// Gráfico de posesión
+	$('<canvas id="graph-posesion" height="400" width="400">').appendTo($('#graficos'));
+
+	tooltips = [];
+	data = [];
+	colores = [];
+
+	for (i in players){
+		player = players[i];
+		tooltips.push(player.nombre);
+		data.push(player.posesion);
+		colores.push(player.equipo ? 'red' : 'blue')
+	}
+
+	graph = new RGraph.Pie('graph-posesion',data);
+	graph.Set('chart.tooltips', tooltips);
+	graph.Set('chart.exploded', 25);
+	graph.Set('chart.colors', colores);
+	graph.Draw();
 
 	return false;
 })

@@ -7,3 +7,14 @@
 {
 	color: blue;
 }
+
+canvas
+{
+	border-width: 2px;
+	border-style: solid;
+}
+
+#graph-posesion
+{
+	float: left;
+}

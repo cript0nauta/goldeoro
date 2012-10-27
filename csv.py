@@ -7,7 +7,6 @@ from soccerstats.models import *
 
 def genera_equipos():
 	arc = open('data/equipos.csv','w')
-	arc.write('pk,nombre,iniciales\n')
 	for equipo in Equipo.objects.all():
 		arr = [
 			equipo.pk,
@@ -20,7 +19,6 @@ def genera_equipos():
 
 def genera_jugadores():
 	arc = open('data/jugadores.csv','w')
-	arc.write('pk,equipo,nombre,casaca\n')
 	for j in Jugador.objects.all():
 		arr = [
 			j.pk,

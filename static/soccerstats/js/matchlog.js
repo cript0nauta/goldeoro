@@ -202,37 +202,44 @@ $(function(){
 				'<br>Perdidos: ' + player.malos;
 			tooltips.push(tooltip);
 			tooltips.push(tooltip);
-			txt = equipos[player.equipo].iniciales;
-			txt += ' ';
-			txt += player.casaca;
-			//leyendas.push(txt)
 			data.push([player.pases, player.malos]);
 		}
 	}
 
 	graph = new RGraph.Bar('graph-pases', data);
 	graph.Set('chart.tooltips', tooltips);
+	graph.Set('chart.title', 'Pases y pelotas perdidas por jugador');
 	graph.Set('chart.tooltips.event', 'onmousemove');
 	graph.Set('chart.gutter.left',35);
 	graph.Draw();
 
 
 	// Gráfico de posesión
-	$('<canvas id="graph-posesion" height="400" width="400">').appendTo($('#graficos'));
+	$('<canvas id="graph-posesion" height="200" width="200">').appendTo($('#graficos'));
 
 	tooltips = [];
 	data = [];
 	colores = [];
+	total_pos = pos[0] + pos[1]; // Segundos de juego
 
-	for (i in players){
+	for(i in players){
 		player = players[i];
-		tooltips.push(player.nombre);
-		data.push(player.posesion);
-		colores.push(player.equipo ? 'red' : 'blue')
+		if(player.pases){
+			pos=(parseInt((player.posesion*100)/total_pos)+'%');
+			tooltip = player.nombre + '<br>Equipo: ' + 
+				equipos[player.equipo].nombre + '<br>' + 
+				pos;
+			tooltips.push(tooltip);
+			data.push(player.posesion);
+			colores.push(player.equipo ? 'red' : 'blue');
+		}
 	}
 
 	graph = new RGraph.Pie('graph-posesion',data);
 	graph.Set('chart.tooltips', tooltips);
+	graph.Set('chart.gutter.top', 50);
+	graph.Set('chart.title', 'Posesión por jugador');
+	graph.Set('chart.tooltips.event', 'onmousemove');
 	graph.Set('chart.exploded', 25);
 	graph.Set('chart.colors', colores);
 	graph.Draw();

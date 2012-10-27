@@ -120,7 +120,7 @@ loguea = function(){
 
 	// Tabla individual de jugadores, pases y posesión
 	
-	oculta = $('<a href="#" id="ocultatabla">').text('Mostrar tabla').click(function(){
+	oculta = $('<a href="#" id="ocultatabla">').text('Ocultar tabla').click(function(){
 		x = $('#tablaindividual');
 		if(x.css('display') == 'none'){
 			$(this).text('Ocultar tabla');
@@ -132,7 +132,7 @@ loguea = function(){
 	});
 	oculta.prependTo($('#individual'))
 
-	t = $('<table>').attr('border','1').attr('id','tablaindividual').css('display','none');
+	t = $('<table>').attr('border','1').attr('id','tablaindividual');
 	tr = $('<tr>');
 	$('<th>').text('N°').appendTo(tr);
 	$('<th>').text('Nombre').appendTo(tr);
@@ -250,7 +250,8 @@ loguea = function(){
 	for(i in players){
 		player = players[i];
 		if(player.pases){
-			pos=(parseInt((player.posesion*100)/total_pos)+'%');
+			n = (player.posesion*100) / total_pos;
+			pos=(Math.round(n*100)/100 + '%');
 			tooltip = player.nombre + '<br>Equipo: ' + 
 				equipos[player.equipo].nombre + '<br>' + 
 				pos;

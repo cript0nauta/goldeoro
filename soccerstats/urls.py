@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('soccerstats.views',
-	url('^adminmatch/$' , 'admin'),
+	url('^$' , 'admin'),
 	url('^addmatch/$', 'addmatch'),
 	url('^json/players/(?P<equipo>\\d+)/$', 'json_players'),
 	url('^finalizado/', 'finalizado'),

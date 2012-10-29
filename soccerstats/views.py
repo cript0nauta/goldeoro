@@ -73,7 +73,7 @@ def finalizado(request):
 	partido = get_object_or_404(Partido, pk=partido_id)
 	partido.json = json
 	partido.save()
-	return HttpResponseRedirect('/adminmatch/')
+	return HttpResponseRedirect('/')
 
 def matchlog(request, match_id):
 	partido = get_object_or_404(Partido, pk = match_id)

@@ -1,2 +1,21 @@
-Soccerstats by sh4r3m4n
-Prohibida su distribuición, uso o modificación sin la debida autorazación de su autor
+Goldeoro by sh4r3m4n
+
+Aplicación que nos permite aplicarle estadísticas a partidos de fútbol
+
+Se debe tener instalado Django para correr la aplicación.
+
+En este repositorio se distribuye todo el sitio Django, junto a la base de
+datos con algunos jugadores, y con las estadísticas de dos partidos reales.
+El usuario y contraseña por defecto para acceder a /admin/ es admin:soccerstats
+
+Para correr el servidor ejecutar manage.py con el argumento runserver. Se puede
+acceder al sitio web en http://localhost:8000/
+
+Para modificar equipos y jugadores acceder a http://localhost:8000/admin
+En http://localhost:8000/addmatch/ podemos crear un nuevo partido y luego
+mapearlo. Una vez hecho esto, se puede acceder a las estadísticas en la
+página principal.
+
+Esta aplicación y todos sus datos y componentes, a excepción de la librería
+Jquery, Jquery UI y RGraph se encuentran bajo licencia GPLv3, visible en el
+fichero LICENSE.txt
